@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f7f1" />
+  <title>Little Dreams — My Life Bucket List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Little Dreams home">
+        <span class="brand-mark">✳</span>
+        <span>little dreams<span class="brand-dot">.</span></span>
+      </a>
+      <span class="topbar-note">A life full of beautiful possibilities</span>
+      <button class="button button-primary top-add" id="addDreamBtn">
+        <span>＋</span> Add a dream
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-star">✦</span> YOUR PERSONAL DREAM SPACE</span>
+          <h1>A life worth<br> <em>dreaming about.</em></h1>
+          <p class="hero-description">
+            A little place for all the things you want to do, places you want to see,
+            and moments you want to experience.
+          </p>
+          <button class="button button-dark" id="heroAddBtn">Start your bucket list <span>↗</span></button>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a dreamy landscape">
+          <div class="sun"></div>
+          <div class="hero-star star-one">✳</div>
+          <div class="hero-star star-two">✦</div>
+          <div class="hero-star star-three">✧</div>
+          <div class="hill hill-back"></div>
+          <div class="hill hill-front"></div>
+          <div class="hero-caption">the world is waiting for you</div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Bucket list statistics">
+        <article class="stat-card">
+          <span class="stat-icon icon-sage">✧</span>
+          <div><span class="stat-label">MY DREAMS</span><strong id="totalStat">0</strong></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon icon-peach">♡</span>
+          <div><span class="stat-label">IN PROGRESS</span><strong id="progressStat">0</strong></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon icon-lilac">✿</span>
+          <div><span class="stat-label">DREAMS LIVED</span><strong id="completedStat">0</strong></div>
+        </article>
+        <article class="stat-card overall-stat">
+          <div class="overall-top"><span class="stat-label">MY JOURNEY</span><strong id="overallPercent">0%</strong></div>
+          <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
+          <span class="stat-foot" id="overallText">Every dream starts somewhere.</span>
+        </article>
+      </section>
+
+      <section class="list-section" id="dreamsSection">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">YOUR WISHES, YOUR WAY</span>
+            <h2>My bucket list <span class="heading-sparkle">✳</span></h2>
+            <p class="section-subtitle">Big adventures, little joys, everything in between.</p>
+          </div>
+          <button class="button button-outline" id="secondAddBtn">＋ Add a dream</button>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Find a dream..." aria-label="Search dreams">
+            <kbd>/</kbd>
+          </label>
+          <label class="select-wrap">
+            <span class="sr-only">Filter by category</span>
+            <select id="categoryFilter">
+              <option value="all">All categories</option>
+              <option value="Travel">✈ Travel</option>
+              <option value="Personal Growth">✿ Personal growth</option>
+              <option value="Adventure">⛰ Adventure</option>
+              <option value="Career">✧ Career</option>
+              <option value="Creativity">♡ Creativity</option>
+              <option value="Relationships">☼ Relationships</option>
+              <option value="Lifestyle">❋ Lifestyle</option>
+              <option value="Other">✦ Other</option>
+            </select>
+          </label>
+          <label class="select-wrap">
+            <span class="sr-only">Sort dreams</span>
+            <select id="sortSelect">
+              <option value="newest">Recently added</option>
+              <option value="oldest">Oldest first</option>
+              <option value="title">Alphabetical</option>
+              <option value="date">Target date</option>
+              <option value="progress">Most progress</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="view-tabs" role="tablist" aria-label="Dream views">
+          <button class="view-tab active" data-view="all" role="tab" aria-selected="true">All dreams <span id="allCount">0</span></button>
+          <button class="view-tab" data-view="active" role="tab" aria-selected="false">In progress <span id="activeCount">0</span></button>
+          <button class="view-tab" data-view="completed" role="tab" aria-selected="false">Completed <span id="doneCount">0</span></button>
+        </div>
+
+        <div class="dream-grid" id="dreamGrid" aria-live="polite"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <div class="empty-illustration">✿</div>
+          <h3 id="emptyTitle">Your next adventure starts here.</h3>
+          <p id="emptyText">Add your first dream and give yourself something wonderful to look forward to.</p>
+          <button class="button button-primary" id="emptyAddBtn">＋ Add your first dream</button>
+        </div>
+      </section>
+
+      <section class="quote-banner">
+        <span class="quote-flower">✳</span>
+        <p>“One day, or day one. You decide.”</p>
+        <span class="quote-subtitle">MAKE SPACE FOR THE LIFE YOU WANT TO LIVE</span>
+      </section>
+
+      <section class="journal-section" id="journalSection">
+        <div class="journal-heading">
+          <div>
+            <span class="eyebrow">LITTLE THOUGHTS, BIG MEANING</span>
+            <h2>My dream journal <span>♡</span></h2>
+            <p class="section-subtitle">Write down the feelings, plans and memories behind your dreams.</p>
+          </div>
+        </div>
+        <form id="journalForm" class="journal-form">
+          <label for="journalEntry">A thought to remember</label>
+          <textarea id="journalEntry" rows="3" maxlength="3000" placeholder="Today I realized that I really want to..."></textarea>
+          <div class="journal-form-footer">
+            <span id="journalDateLabel">A little note for today</span>
+            <button class="button button-primary" type="submit">Save journal entry ↗</button>
+          </div>
+        </form>
+        <div class="journal-entries" id="journalEntries"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="brand footer-brand" href="#"><span class="brand-mark">✳</span> little dreams<span class="brand-dot">.</span></a>
+      <p>Made for the life you're dreaming of. ♡</p>
+      <button id="exportBtn" class="text-button">Export my data ↓</button>
+    </footer>
+  </div>
+
+  <!-- Add / edit dream dialog -->
+  <dialog id="dreamDialog" class="dream-dialog">
+    <form id="dreamForm">
+      <div class="dialog-heading">
+        <div>
+          <span class="eyebrow">A NEW CHAPTER</span>
+          <h2 id="dialogTitle">Add a dream <span>✧</span></h2>
+          <p>Every big adventure begins with a little idea.</p>
+        </div>
+        <button type="button" class="icon-button" id="closeDialogBtn" aria-label="Close dialog">✕</button>
+      </div>
+
+      <input type="hidden" id="dreamId">
+      <div class="form-grid">
+        <div class="field full-field">
+          <label for="dreamTitle">Dream title <span class="required">*</span></label>
+          <input id="dreamTitle" name="title" required maxlength="100" placeholder="e.g. Watch the northern lights">
+        </div>
+
+        <div class="field full-field">
+          <label for="dreamDescription">Tell me about this dream <span class="required">*</span></label>
+          <textarea id="dreamDescription" required maxlength="2000" rows="3" placeholder="Why is this special to you? What do you imagine?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="dreamCategory">Category</label>
+          <select id="dreamCategory">
+            <option>Travel</option><option>Personal Growth</option><option>Adventure</option>
+            <option>Career</option><option>Creativity</option><option>Relationships</option>
+            <option>Lifestyle</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="dreamStatus">Status</label>
+          <select id="dreamStatus">
+            <option value="planned">Not started</option>
+            <option value="progress">In progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="dreamDate">Target date</label>
+          <input id="dreamDate" type="date">
+        </div>
+        <div class="field">
+          <label for="dreamBudget">Estimated budget</label>
+          <input id="dreamBudget" type="number" min="0" step="0.01" placeholder="e.g. 15000">
+        </div>
+        <div class="field full-field">
+          <label for="dreamLocation">Location <span class="optional">(optional)</span></label>
+          <input id="dreamLocation" maxlength="150" placeholder="e.g. Kyoto, Japan">
+        </div>
+
+        <div class="field full-field">
+          <label for="dreamPhoto">Dream picture <span class="optional">(optional)</span></label>
+          <label class="upload-box" for="dreamPhoto" id="uploadBox">
+            <img id="photoPreview" alt="Selected dream preview" hidden>
+            <span class="upload-icon">↑</span>
+            <strong id="uploadLabel">Choose a photo from your device</strong>
+            <small>JPG, PNG, WebP or GIF · Up to 8 MB</small>
+          </label>
+          <input id="dreamPhoto" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <button type="button" id="removePhotoBtn" class="text-button remove-photo" hidden>Remove photo</button>
+        </div>
+
+        <div class="field full-field">
+          <label for="dreamNotes">My plans & journal notes <span class="optional">(optional)</span></label>
+          <textarea id="dreamNotes" maxlength="3000" rows="3" placeholder="Steps to take, people to ask, memories to keep..."></textarea>
+        </div>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" class="button button-outline" id="cancelDialogBtn">Cancel</button>
+        <button type="submit" class="button button-primary" id="saveDreamBtn">Save my dream ✧</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
